@@ -1,0 +1,18 @@
+{
+  "name": "comparison-fw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tr": "pnpm --filter=./frameworks/tanstack-router",
+    "r2": "pnpm --filter=./frameworks/remix2",
+    "r3": "pnpm --filter=./frameworks/remix3",
+    "rr": "pnpm --filter=./frameworks/react-router7"
+  },
+  "engines": {
+    "pnpm": ">=10.28.2",
+    "npm": "please-use-pnpm"
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.2"
+}
