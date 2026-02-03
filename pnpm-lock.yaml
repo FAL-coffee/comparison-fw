@@ -141,6 +141,9 @@ importers:
       '@remix-run/compression-middleware':
         specifier: ^0.1.2
         version: 0.1.2
+      '@remix-run/dom':
+        specifier: 0.0.0-experimental-remix-jam.1
+        version: 0.0.0-experimental-remix-jam.1
       '@remix-run/fetch-router':
         specifier: ^0.16.0
         version: 0.16.0
@@ -157,18 +160,27 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3
     devDependencies:
+      '@tailwindcss/vite':
+        specifier: ^4.1.18
+        version: 4.1.18(vite@7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2))
       '@types/node':
         specifier: 24.6.0
         version: 24.6.0
       '@typescript/native-preview':
         specifier: 7.0.0-dev.20251125.1
         version: 7.0.0-dev.20251125.1
-      esbuild:
-        specifier: 0.25.10
-        version: 0.25.10
+      '@vitejs/plugin-react':
+        specifier: ^5.1.3
+        version: 5.1.3(vite@7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2))
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.1.18
       tsx:
         specifier: 4.20.6
         version: 4.20.6
+      vite:
+        specifier: ^7.3.1
+        version: 7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2)
 
   frameworks/tanstack-router:
     dependencies:
@@ -1243,6 +1255,12 @@ packages:
       wrangler:
         optional: true
 
+  '@remix-run/dom@0.0.0-experimental-remix-jam.1':
+    resolution: {integrity: sha512-HLLrUpSz7EicCAWQKqJt7RK2Y04sruwASP5gNgTK3GQzL216XCGoh+LjrMRQ8Aw7GFgHSkvQuyhVb6Y4xY2aDw==}
+
+  '@remix-run/events@0.0.0-experimental-remix-jam.1':
+    resolution: {integrity: sha512-4Xs0Ek3QYsx2Tq64ZkSMXN9gAwBOg42vzK/5aTkACktb6asljm/wf8mgFPtf+IUegh4BBzkapNXAdmXEh4UqNg==}
+
   '@remix-run/express@2.17.4':
     resolution: {integrity: sha512-4zZs0L7v2pvAq896zHRLNMhoOKIPXM9qnYdHLbz4mpZUMbNAgQacGazArIrUV3M4g0gRMY0dLrt5CqMNrlBeYg==}
     engines: {node: '>=18.0.0'}
@@ -1335,6 +1353,9 @@ packages:
 
   '@remix-run/static-middleware@0.4.3':
     resolution: {integrity: sha512-0pO3CFc1ojP8agNCsDcJdgQdJpzzek7OpO1U3v6hc632DiANTHzJlkv0PJrq44pXj9ioA7N202iddkc/wNfRXg==}
+
+  '@remix-run/style@0.0.0-experimental-remix-jam.1':
+    resolution: {integrity: sha512-aRETYid6C1V1smXnhbxoFdsOi+qxvXM9NZ9UIQeRQ9ZEWT2TS1dtyeNTv6QXO1Swp9QtdWlnPb6RlzUBvG5h4Q==}
 
   '@remix-run/web-blob@3.1.0':
     resolution: {integrity: sha512-owGzFLbqPH9PlKb8KvpNJ0NO74HWE2euAn61eEiyCXX/oteoVzTVSN8mpLgDjaxBf2btj5/nUllSUgpyd6IH6g==}
@@ -6397,6 +6418,13 @@ snapshots:
       - utf-8-validate
       - yaml
 
+  '@remix-run/dom@0.0.0-experimental-remix-jam.1':
+    dependencies:
+      '@remix-run/events': 0.0.0-experimental-remix-jam.1
+      '@remix-run/style': 0.0.0-experimental-remix-jam.1
+
+  '@remix-run/events@0.0.0-experimental-remix-jam.1': {}
+
   '@remix-run/express@2.17.4(express@4.22.1)(typescript@5.9.3)':
     dependencies:
       '@remix-run/node': 2.17.4(typescript@5.9.3)
@@ -6507,6 +6535,8 @@ snapshots:
       '@remix-run/html-template': 0.3.0
       '@remix-run/mime': 0.3.0
       '@remix-run/response': 0.3.1
+
+  '@remix-run/style@0.0.0-experimental-remix-jam.1': {}
 
   '@remix-run/web-blob@3.1.0':
     dependencies:
@@ -6718,6 +6748,13 @@ snapshots:
       '@tailwindcss/oxide': 4.1.18
       tailwindcss: 4.1.18
       vite: 7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
+
+  '@tailwindcss/vite@4.1.18(vite@7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2))':
+    dependencies:
+      '@tailwindcss/node': 4.1.18
+      '@tailwindcss/oxide': 4.1.18
+      tailwindcss: 4.1.18
+      vite: 7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2)
 
   '@tanstack/devtools-client@0.0.3':
     dependencies:
@@ -7375,6 +7412,18 @@ snapshots:
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
       vite: 7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vitejs/plugin-react@5.1.3(vite@7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2))':
+    dependencies:
+      '@babel/core': 7.29.0
+      '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
+      '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.29.0)
+      '@rolldown/pluginutils': 1.0.0-rc.2
+      '@types/babel__core': 7.20.5
+      react-refresh: 0.18.0
+      vite: 7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -11165,6 +11214,22 @@ snapshots:
       jiti: 1.21.7
       lightningcss: 1.30.2
       tsx: 4.21.0
+      yaml: 2.8.2
+
+  vite@7.3.1(@types/node@24.6.0)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2):
+    dependencies:
+      esbuild: 0.27.2
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rollup: 4.57.1
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 24.6.0
+      fsevents: 2.3.3
+      jiti: 2.6.1
+      lightningcss: 1.30.2
+      tsx: 4.20.6
       yaml: 2.8.2
 
   vitefu@1.1.1(vite@7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)):
