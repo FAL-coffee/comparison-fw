@@ -1,2 +1,6 @@
 packages:
   - 'frameworks/*'
+
+catalog:
+  'tailwindcss': '4.1.18'
+  '@tailwindcss/vite': '4.1.18'
