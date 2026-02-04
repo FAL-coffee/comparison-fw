@@ -3,27 +3,25 @@ import {
   Link,
   useRouteError,
   isRouteErrorResponse,
-  type ClientLoaderFunctionArgs,
+  type LoaderFunctionArgs,
 } from "react-router";
 import {
   fetchOrder,
   fetchOrderHistory,
-  parseApiOptionsFromUrl,
   ApiError,
 } from "@comparison-fw/shared";
 
 export const meta = () => [{ title: "注文詳細 - React Router 7" }];
 
-export async function clientLoader({ params, request }: ClientLoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const orderId = params.orderId!;
-  const apiOptions = parseApiOptionsFromUrl(request.url);
 
   try {
-    const order = await fetchOrder(orderId, apiOptions);
+    const order = await fetchOrder(orderId);
     if (!order) {
       throw new Response("注文が見つかりません", { status: 404 });
     }
-    const history = await fetchOrderHistory(orderId, apiOptions);
+    const history = await fetchOrderHistory(orderId);
     return { order, history };
   } catch (error) {
     if (error instanceof ApiError) {
@@ -34,7 +32,7 @@ export async function clientLoader({ params, request }: ClientLoaderFunctionArgs
 }
 
 export default function OrderDetail() {
-  const { order, history } = useLoaderData<typeof clientLoader>();
+  const { order, history } = useLoaderData<typeof loader>();
 
   return (
     <div className="p-6 space-y-6">

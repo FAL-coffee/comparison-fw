@@ -3,13 +3,29 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    plugins: [
-        tailwindcss(),
-        react({
-            jsxImportSource: '@remix-run/component',
-        }),
-    ],
-    optimizeDeps: {
-        entries: ['index.html', 'src/**/*.{ts,tsx}'],
+  root: '.',
+  publicDir: 'public',
+
+  plugins: [react(), tailwindcss()],
+
+  build: {
+    outDir: 'public/assets',
+    emptyOutDir: false,
+    sourcemap: true,
+
+    rollupOptions: {
+      input: {
+        main: 'app/entry.tsx',
+      },
+      output: {
+        entryFileNames: '[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: '[name]-[hash][extname]',
+      },
     },
+  },
+
+  server: {
+    port: 5173,
+  },
 })

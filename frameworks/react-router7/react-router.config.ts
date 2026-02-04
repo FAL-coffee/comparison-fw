@@ -1,6 +1,6 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  // SPA mode enabled
-  ssr: false,
+  // SSR mode enabled
+  ssr: true,
 } satisfies Config;

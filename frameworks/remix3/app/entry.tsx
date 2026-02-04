@@ -1,13 +1,16 @@
-import { createRoot, type Handle } from '@remix-run/component'
-import './app.css'
+import { hydrate } from './lib/remix-component/hydrate-client'
 
-export function App(handle: Handle) {
-    return () => (
-        <div>
-            <h1>Hello, Remix 3!</h1>
-            <p>This is a simple Remix 3 application.</p>
-        </div>
-    )
-}
+let root = hydrate({
+    async loadModule(moduleUrl, exportName) {
+        let mod = await import(moduleUrl)
+        let Component = mod[exportName]
+        if (!Component) {
+            throw new Error(`Unknown component: ${moduleUrl}#${exportName}`)
+        }
+        return Component
+    },
+})
 
-createRoot(document.getElementById('root')!).render(<App />)
+root.addEventListener('error', (event) => {
+    console.error('Hydration error:', event.error)
+})

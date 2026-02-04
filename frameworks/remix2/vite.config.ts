@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     remix({
-      ssr: false,
+      ssr: true,
     }),
     tsconfigPaths(),
   ],

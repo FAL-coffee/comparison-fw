@@ -1,7 +1,7 @@
-import { redirect } from "@remix-run/react";
-import type { ClientLoaderFunctionArgs } from "@remix-run/react";
+import { redirect } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
-export const clientLoader = async (_args: ClientLoaderFunctionArgs) => {
+export const loader = async (_args: LoaderFunctionArgs) => {
   return redirect("/orders");
 };
 

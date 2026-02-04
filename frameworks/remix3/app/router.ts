@@ -7,8 +7,8 @@ import { staticFiles } from '@remix-run/static-middleware'
 
 import { routes } from './routes.ts'
 
-// import adminController from './admin.tsx'
-// import { uploadsAction } from './uploads.tsx'
+import * as homeController from './home.tsx'
+import orderController from './order.tsx'
 
 let middleware = []
 
@@ -29,6 +29,5 @@ middleware.push(asyncContext())
 
 export let router = createRouter({ middleware })
 
-// router.get(routes.uploads, uploadsAction)
-
-// router.map(routes.home, marketingController.home)
+router.map(routes.home, homeController.home)
+router.map(routes.order, orderController)

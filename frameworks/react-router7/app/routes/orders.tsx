@@ -1,15 +1,14 @@
-import { useLoaderData, Link, type ClientLoaderFunctionArgs } from "react-router";
-import { fetchOrders, parseApiOptionsFromUrl } from "@comparison-fw/shared";
+import { useLoaderData, Link } from "react-router";
+import { fetchOrders } from "@comparison-fw/shared";
 
 export const meta = () => [{ title: "注文一覧 - React Router 7" }];
 
-export async function clientLoader({ request }: ClientLoaderFunctionArgs) {
-  const apiOptions = parseApiOptionsFromUrl(request.url);
-  return fetchOrders({}, apiOptions);
+export async function loader() {
+  return fetchOrders({});
 }
 
 export default function OrdersIndex() {
-  const data = useLoaderData<typeof clientLoader>();
+  const data = useLoaderData<typeof loader>();
 
   return (
     <div className="p-6 space-y-6">

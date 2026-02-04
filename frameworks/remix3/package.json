@@ -1,19 +1,26 @@
 {
-  "name": "bookstore-demo",
   "private": true,
   "type": "module",
   "dependencies": {
+    "@comparison-fw/shared": "workspace:*",
     "@remix-run/async-context-middleware": "0.1.2",
     "@remix-run/component": "0.4.0",
     "@remix-run/compression-middleware": "0.1.2",
+    "@remix-run/cookie": "^0.5.1",
     "@remix-run/dom": "0.0.0-experimental-remix-jam.1",
     "@remix-run/fetch-router": "0.16.0",
+    "@remix-run/interaction": "^0.5.0",
     "@remix-run/logger-middleware": "0.1.2",
     "@remix-run/method-override-middleware": "0.1.3",
     "@remix-run/node-fetch-server": "0.13.0",
-    "@remix-run/static-middleware": "0.4.3"
+    "@remix-run/response": "^0.3.1",
+    "@remix-run/session": "^0.4.1",
+    "@remix-run/static-middleware": "0.4.3",
+    "esbuild": "0.25.10",
+    "tsx": "4.20.6"
   },
   "devDependencies": {
+    "cross-env": "7.0.3",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "24.6.0",
     "@typescript/native-preview": "7.0.0-dev.20251125.1",
@@ -23,7 +30,10 @@
     "vite": "7.3.1"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm run --filter \".\" --parallel \"/^dev:/\"",
+    "dev:server": "cross-env NODE_ENV=development tsx watch app/server.ts",
+    "dev:browser": "esbuild app/*.tsx --outbase=app --outdir=public/assets --bundle --minify --splitting --format=esm --entry-names='[dir]/[name]' --chunk-names='chunks/[name]-[hash]' --sourcemap --watch",
+    "start": "tsx server.ts",
     "typecheck": "tsgo --noEmit"
   }
 }

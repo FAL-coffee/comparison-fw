@@ -34,5 +34,4 @@ export {
   fetchOrder,
   fetchOrderHistory,
   updateOrder,
-  parseApiOptionsFromUrl,
 } from './fakeApi';

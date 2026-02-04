@@ -1,7 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import type { ClientLoaderFunctionArgs } from "@remix-run/react";
-import { fetchOrders, parseApiOptionsFromUrl } from "@comparison-fw/shared";
+import { fetchOrders } from "@comparison-fw/shared";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,13 +9,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
-  const apiOptions = parseApiOptionsFromUrl(request.url);
-  return fetchOrders({}, apiOptions);
+export const loader = async () => {
+  return fetchOrders({});
 };
 
 export default function OrdersIndex() {
-  const data = useLoaderData<typeof clientLoader>();
+  const data = useLoaderData<typeof loader>();
 
   return (
     <div className="p-6 space-y-6">

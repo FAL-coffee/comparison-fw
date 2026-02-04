@@ -32,37 +32,15 @@ async function applyOptions(options?: ApiOptions): Promise<void> {
   }
 }
 
-export function parseApiOptionsFromUrl(url: string): ApiOptions {
-  const urlObj = new URL(url, 'http://localhost');
-  const options: ApiOptions = {};
-
-  const delay = urlObj.searchParams.get('delay');
-  if (delay) {
-    options.delay = parseInt(delay, 10);
-  }
-
-  const fail = urlObj.searchParams.get('fail');
-  if (fail === '404' || fail === '422' || fail === '500') {
-    options.fail = parseInt(fail, 10) as 404 | 422 | 500;
-  }
-
-  return options;
-}
-
 export async function fetchOrders(
   params: GetOrdersParams,
-  options?: ApiOptions
 ): Promise<GetOrdersResult> {
-  await applyOptions(options);
   return db.getOrders(params);
 }
 
 export async function fetchOrder(
   id: string,
-  options?: ApiOptions
 ): Promise<Order> {
-  await applyOptions(options);
-
   if (id === ERROR_IDS.INTERNAL_ERROR) {
     throw new ApiError(500, 'Internal Server Error');
   }

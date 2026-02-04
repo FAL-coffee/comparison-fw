@@ -8,25 +8,23 @@ import {
   useRouteError,
   isRouteErrorResponse,
   useActionData,
-  type ClientLoaderFunctionArgs,
-  type ClientActionFunctionArgs,
+  type LoaderFunctionArgs,
+  type ActionFunctionArgs,
 } from "react-router";
 import {
   fetchOrder,
   updateOrder,
-  parseApiOptionsFromUrl,
   ApiError,
   type OrderStatus,
 } from "@comparison-fw/shared";
 
 export const meta = () => [{ title: "ステータス更新 - React Router 7" }];
 
-export async function clientLoader({ params, request }: ClientLoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const orderId = params.orderId!;
-  const apiOptions = parseApiOptionsFromUrl(request.url);
 
   try {
-    const order = await fetchOrder(orderId, apiOptions);
+    const order = await fetchOrder(orderId);
     if (!order) {
       throw new Response("注文が見つかりません", { status: 404 });
     }
@@ -39,16 +37,15 @@ export async function clientLoader({ params, request }: ClientLoaderFunctionArgs
   }
 }
 
-export async function clientAction({ params, request }: ClientActionFunctionArgs) {
+export async function action({ params, request }: ActionFunctionArgs) {
   const orderId = params.orderId!;
   const formData = await request.formData();
-  const apiOptions = parseApiOptionsFromUrl(request.url);
 
   const status = formData.get("status") as OrderStatus;
   const memo = formData.get("memo") as string;
 
   try {
-    await updateOrder({ id: orderId, status, memo }, apiOptions);
+    await updateOrder({ id: orderId, status, memo });
     return redirect(`/orders/${orderId}`);
   } catch (error) {
     if (error instanceof ApiError) {
@@ -59,8 +56,8 @@ export async function clientAction({ params, request }: ClientActionFunctionArgs
 }
 
 export default function OrderStatusUpdate() {
-  const { order } = useLoaderData<typeof clientLoader>();
-  const actionData = useActionData<typeof clientAction>();
+  const { order } = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
