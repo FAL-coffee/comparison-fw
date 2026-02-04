@@ -1,5 +1,6 @@
 packages:
   - 'frameworks/*'
+  - 'packages/*'
 
 catalog:
   'tailwindcss': '4.1.18'

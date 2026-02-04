@@ -1,3 +1,4 @@
+import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
@@ -10,9 +11,15 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@shared": path.resolve(__dirname, "../shared"),
+    },
+  },
   plugins: [
     tailwindcss(),
     remix({
+      ssr: false,
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
